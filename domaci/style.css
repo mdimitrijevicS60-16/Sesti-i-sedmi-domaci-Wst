@@ -1,0 +1,39 @@
+#ime {
+    text-align: center;
+    background-color: lightblue;
+}
+#prezime {
+    text-align: right;
+    background-color: yellow;
+}
+#jmbg {
+    text-align: left;
+    background-color: lightgreen;
+}
+#ime1 {
+    color: red;
+    text-align: center;
+    background-color: lightgreen;
+}
+#prezime1 {
+    color: red;
+    text-align: right;
+    background-color: lightgreen;
+}
+#jmbg1 {
+    color: red;
+    text-align: left;
+    background-color: lightgreen;
+}
+table, th, td {
+    border: 2px solid green;
+}
+table {
+    border-collapse: collapse;
+}
+.forma {
+    width: 500px;
+    border: 5px solid green;
+    text-align: center;
+    padding: 1%;
+}
