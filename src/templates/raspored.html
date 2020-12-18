@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Raspored Nastave</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        #rows:nth-child(even) {
+            background-color: rgb(215, 235, 241);
+        }
+
+        #rows:nth-child(odd) {
+            background-color: rgb(124, 145, 185);
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#pretraga").keyup(function () {
+                var value = $("#pretraga");
+                value = value.val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });   
+    </script>
+</head>
+
+<body>
+    <input type="text" id="pretraga" onkeyup="myFunction()" placeholder="Unesite..." title="Ukucajte naziv za pretragu">
+    <table border="1" style="border-collapse: collapse" id="myTable">
+        <thead>
+            <tr>
+                <th>Predmet</th>
+                <th>Tip</th>
+                <th>Nastavnik</th>
+                <th>Grupe</th>
+                <th>Dan</th>
+                <th>Termin</th>
+                <th>Ucionica</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for red in redovi %}
+            <tr id="rows" style="text-align: center">
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[0]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[1]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[2]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[3]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[4]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[5]}}</td>
+                <td class="filter" onclick="filtriraj()">{{red.split(',')[6]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <br>
+        <hr>
+        <br>
+        <table id="raspored"></table>
+        <script>
+            /* //pretraga po prvoj koloni
+            function myFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("pretraga");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            */
+            var tabela = $('#raspored');
+            tabela.on("click", "td", filtriraj);
+
+            function getTableCell(fieldName, rowData) {
+            //var td = $("<td></td>");
+              var td = $("<td class="filter" onclick="filtriraj()"></td>");
+            var fieldData = rowData[fieldName];
+            //alert("fieldName = ["+fieldName +"] rowData[fieldName][value] = ["+rowData[fieldName]["value"] + "]");
+            td.html(fieldData["value"]);
+            return td;
+        }
+            
+        </script>
+</body>
+
+</html>
